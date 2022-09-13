@@ -38,7 +38,7 @@ You can choose 2 output styles
     c_N\\
     cn_{N1}\ cn_{N2}\ ... cn_{Nc_N}\\
     $
-    where c_0 represents the number of out_edges and cn_ij represents the node which has a edge from node i.
+    where c_0 represents the number of out_edges and cn_ij represents the node which has a edge to node i.
 
 
 
