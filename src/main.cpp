@@ -10,7 +10,7 @@ MDG::FileUtil FU;
 int main() {
   fs::path thispath = MDG::Output_directory;
   thispath          = FU.CreateDirectory(thispath, MDG::prefix);
-
+  
   for (auto& i : MDG::nodes) {
     fs::path nodespath = FU.CreateDirectory(thispath, std::to_string(i));
     for (auto& j : MDG::alpha) {
@@ -31,4 +31,12 @@ int main() {
       }
     }
   }
+  /*
+  MDG::Graph G;
+  G.GenerateRandomGraphfromParam(20, 0.5, 0.75);
+  std::string S = std::to_string(20) + "_" + std::to_string(0.5) + "_" +
+                          std::to_string(0.75);
+  auto pt = FU.CreateTxtFile(".", S);
+  G.FileOutput(pt);
+  */
 }
