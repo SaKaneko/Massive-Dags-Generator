@@ -109,13 +109,8 @@ int main(int argc, char* argv[]) {
     for (auto& i : Graphvtxt) {
       url += i;
     }
-    std::cout << "Graphvtxt :" << std::endl;
-    for (auto& i : Graphvtxt) {
-      std::cout << i << std::endl;
-    }
     std::string command =
         "rundll32.exe url.dll,FileProtocolHandler \"" + url + "\"";
-    std::cout << command << std::endl;
     system(command.c_str());
   }
 }
