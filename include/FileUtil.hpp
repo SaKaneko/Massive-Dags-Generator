@@ -55,13 +55,13 @@ class FileUtil {
   }
 
 public:
-  fs::path CreateDirectory(fs::path& p, std::string DirectoryName) {
+  fs::path CreateDirectory(fs::path p, std::string DirectoryName) {
     auto getp   = RollingNumber(p, DirectoryName, true);
     auto result = fs::create_directory(getp);
     assert(result);
     return getp;
   }
-  fs::path CreateTxtFile(fs::path& p, std::string Filename) {
+  fs::path CreateTxtFile(fs::path p, std::string Filename) {
     auto getp = RollingNumber(p, Filename, false, "_", ".txt");
     std::ofstream creating_file;
     creating_file.open(getp);

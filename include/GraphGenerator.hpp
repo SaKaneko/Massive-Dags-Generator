@@ -27,6 +27,10 @@ struct Node {
   std::multiset<int> children;
   std::vector<int> childrenCP;
   int type;
+  int rank;
+  bool operator<(const struct Node& other) const {
+    return rank < other.rank;
+  }
 };
 
 struct contents {
@@ -54,9 +58,13 @@ struct Graph {
 
     for (int i = 0; i < nodes_in; i++) {
       int noderank = random(0, ranks - 1);
+      N[i].rank    = noderank;
+    }
+    std::sort(N.begin(), N.end());
+    for (int i = 0; i < nodes_in; i++) {
+      int noderank = N[i].rank;
       rankvec[noderank].push_back(i);
     }
-
     for (int i = 0; i < ranks; i++) {
       for (auto& j : rankvec[i]) {
         for (int k = i + 1; k < ranks; k++) {
