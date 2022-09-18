@@ -10,7 +10,7 @@ MDG::FileUtil FU;
 int main() {
   fs::path thispath = MDG::Output_directory;
   thispath          = FU.CreateDirectory(thispath, MDG::prefix);
-  
+
   for (auto& i : MDG::nodes) {
     fs::path nodespath = FU.CreateDirectory(thispath, std::to_string(i));
     for (auto& j : MDG::alpha) {

@@ -36,7 +36,7 @@ struct Graph {
     N.resize(nodes_in);
     srand(time(NULL));
     double rankmx = sqrt(nodes_in) / alpha_in;
-    int ranks     = random(1, 2*rankmx + 1);
+    int ranks     = random(1, 2 * rankmx + 1);
     std::vector<std::vector<int>> rankvec(ranks, std::vector<int>(0));
 
     for (int i = 0; i < nodes_in; i++) {
@@ -67,20 +67,20 @@ struct Graph {
     N[b].parents.push_back(a);
   }
 
-  void Light_prune(){
-    for(int i=0;i<N.size();i++){
-      for(auto &p:N[i].parents){
+  void Light_prune() {
+    for (int i = 0; i < N.size(); i++) {
+      for (auto& p : N[i].parents) {
         std::set<int> checkc = N[p].ancestors;
         N[i].ancestors.merge(checkc);
       }
       std::vector<int> newparents;
-      for(int j=0;j<N[i].parents.size();j++){
-        if(!N[i].ancestors.count(N[i].parents[j])){
+      for (int j = 0; j < N[i].parents.size(); j++) {
+        if (!N[i].ancestors.count(N[i].parents[j])) {
           newparents.push_back(N[i].parents[j]);
           N[i].ancestors.insert(N[i].parents[j]);
         }
       }
-      N[i].parents=newparents;
+      N[i].parents = newparents;
     }
     return;
   }

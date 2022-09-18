@@ -13,31 +13,33 @@ namespace MDG {
 class FileUtil {
   std::map<fs::path, std::map<std::string, int>> rollingmap;
 
-  fs::path RollingNumber(fs::path& p, std::string& FileName,
-                         bool direct = false, std::string pref = "_",
-                         std::string afterf = "") {
+  fs::path RollingNumber(fs::path& p, std::string& FileName, bool direct,
+                         std::string pref = "_", std::string afterf = "") {
     // This function can be used for only "clean" directory.
 
     if (!rollingmap.count(p)) {
       std::map<std::string, int> newmp;
       rollingmap[p] = newmp;
     }
-
     int rollingnumber;
     if (!rollingmap[p].count(FileName)) {
       rollingmap[p][FileName] = 0;
       rollingnumber           = 0;
-      if (direct) {
-        if (!fs::exists(p / FileName)) {
-          rollingmap[p][FileName] = 1;
-          return p / FileName;
-        }
-      }
     }
     else {
       rollingnumber = rollingmap[p][FileName];
+    }
+    if (direct) {
       if (!fs::exists(p / FileName)) {
-        return p / FileName;
+        // rollingmap[p][FileName] = 1;
+        return p / (FileName + afterf);
+      }
+    }
+    else {
+      if (!fs::exists(
+              p / (FileName + pref + std::to_string(rollingnumber) + afterf))) {
+        rollingmap[p][FileName]++;
+        return p / (FileName + pref + std::to_string(rollingnumber) + afterf);
       }
     }
 
