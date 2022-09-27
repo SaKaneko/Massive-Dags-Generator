@@ -7,8 +7,13 @@
 namespace fs = std::filesystem;
 MDG::FileUtil FU;
 
-int main() {
-  fs::path thispath = MDG::Output_directory;
+int main(int argc, char* argv[]) {
+  fs::path thispath;
+  if(argc==2){
+    thispath = argv[1];
+  }else{
+    thispath = MDG::Output_directory;
+  }
   thispath          = FU.CreateDirectory(thispath, MDG::prefix);
 
   for (auto& i : MDG::nodes_loader) {
