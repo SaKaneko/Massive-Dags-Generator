@@ -6,10 +6,31 @@
 #include <string>
 #include <set>
 #include <map>
+#include "Params.hpp"
 
 namespace fs = std::filesystem;
 
 namespace MDG {
+fs::path add_conf(fs::path pt) {
+  if (pt.stem() == ".conf") {
+    std::ofstream ofs;
+    ofs.open(pt, std::ios::app);
+    ofs << "node " << MDG::nodes << std::endl;
+    ofs << "alpha " << MDG::alpha << std::endl;
+    ofs << "p " << MDG::p << std::endl;
+    ofs.close();
+  }
+  else {
+    pt = pt / "config.conf";
+    std::ofstream ofs;
+    ofs.open(pt);
+    ofs << "node " << MDG::nodes << std::endl;
+    ofs << "alpha " << MDG::alpha << std::endl;
+    ofs << "p " << MDG::p << std::endl;
+    ofs.close();
+  }
+  return pt;
+}
 class FileUtil {
   std::map<fs::path, std::map<std::string, int>> rollingmap;
 
