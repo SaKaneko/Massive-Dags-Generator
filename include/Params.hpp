@@ -17,6 +17,6 @@ enum output_type { Table, Adjacency };
 
 const std::filesystem::path Output_directory = ".";
 const std::filesystem::path GraphOutputPath  = "./graphv";
-const std::string prefix                     = "MdgOut";
+const std::string prefix                     = "GraphBase";
 
 } // namespace MDG

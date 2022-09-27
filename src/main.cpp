@@ -12,17 +12,19 @@ int main() {
   thispath          = FU.CreateDirectory(thispath, MDG::prefix);
 
   for (auto& i : MDG::nodes) {
-    fs::path nodespath = FU.CreateDirectory(thispath, std::to_string(i));
+    fs::path nodespath =
+        FU.CreateDirectory(thispath, "nodes_" + std::to_string(i));
     for (auto& j : MDG::alpha) {
-      fs::path alphapath = FU.CreateDirectory(nodespath, std::to_string(j));
+      fs::path alphapath =
+          FU.CreateDirectory(nodespath, "alpha_" + std::to_string(j));
       for (auto& k : MDG::p) {
-        fs::path ppath = FU.CreateDirectory(alphapath, std::to_string(k));
+        fs::path ppath =
+            FU.CreateDirectory(alphapath, "p_" + std::to_string(k));
         for (int l = 0; l < MDG::iteration; l++) {
           MDG::Graph G;
 
           G.GenerateRandomGraphfromParam(i, j, k);
-          std::string S = std::to_string(i) + "_" + std::to_string(j) + "_" +
-                          std::to_string(k);
+          std::string S = "inputgraph";
 
           fs::path outputfile = FU.CreateTxtFile(ppath, S);
 
