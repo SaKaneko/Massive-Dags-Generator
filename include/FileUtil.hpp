@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 
 namespace MDG {
 fs::path add_conf(fs::path pt) {
-  if (pt.stem() == ".conf") {
+  if (pt.extension() == ".conf") {
     std::ofstream ofs;
     ofs.open(pt, std::ios::app);
     ofs << "node " << MDG::nodes << std::endl;
