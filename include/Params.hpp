@@ -19,6 +19,6 @@ enum output_type { Table, Adjacency };
 // File Output
 
 const std::filesystem::path Output_directory = ".";
-const std::string prefix                     = "GraphBase";
+const std::string prefix                     = "normalgraph";
 
 } // namespace MDG

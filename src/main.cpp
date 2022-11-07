@@ -1,6 +1,7 @@
 #include "../include/Params.hpp"
 #include "../include/GraphGenerator.hpp"
 #include "../include/FileUtil.hpp"
+#include "../include/RandomUtil.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -9,12 +10,13 @@ MDG::FileUtil FU;
 
 int main(int argc, char* argv[]) {
   fs::path thispath;
-  if(argc==2){
+  if (argc == 2) {
     thispath = argv[1];
-  }else{
+  }
+  else {
     thispath = MDG::Output_directory;
   }
-  thispath          = FU.CreateDirectory(thispath, MDG::prefix);
+  thispath = FU.CreateDirectory(thispath, MDG::prefix);
 
   for (auto& i : MDG::nodes_loader) {
     MDG::nodes = i;
@@ -32,7 +34,7 @@ int main(int argc, char* argv[]) {
           MDG::Graph G;
 
           G.GenerateRandomGraphfromParam(i, j, k);
-          std::string S = "inputgraph";
+          std::string S = "graph";
 
           fs::path outputfile = FU.CreateTxtFile(ppath, S);
           MDG::add_conf(ppath);

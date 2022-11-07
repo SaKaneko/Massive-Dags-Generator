@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <algorithm>
 #include <fstream>
@@ -7,6 +8,7 @@
 #include <queue>
 #include <random>
 #include "Params.hpp"
+#include "RandomUtil.hpp"
 namespace fs = std::filesystem;
 
 namespace MDG {
@@ -36,7 +38,11 @@ struct Graph {
     N.resize(nodes_in);
     srand(time(NULL));
     double rankmx = sqrt(nodes_in) / alpha_in;
-    int ranks     = random(1, 2 * rankmx + 1);
+    int ranks     = std::ceil(
+            MDG::BoundNormalDistribution(rankmx, rankmx / 3, 0, 2 * rankmx));
+    if (ranks == 0) {
+      std::cout << "error!" << std::endl;
+    }
     std::vector<std::vector<int>> rankvec(ranks, std::vector<int>(0));
 
     for (int i = 0; i < nodes_in; i++) {
