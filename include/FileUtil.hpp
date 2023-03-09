@@ -31,6 +31,26 @@ fs::path add_conf(fs::path pt) {
   }
   return pt;
 }
+fs::path add_cholesky_conf(fs::path pt, int TT) {
+  if (pt.extension() == ".conf") {
+    std::ofstream ofs;
+    ofs.open(pt, std::ios::app);
+    ofs << "T " << TT << std::endl;
+    ofs << "alpha " << MDG::alpha << std::endl;
+    ofs << "p " << MDG::p << std::endl;
+    ofs.close();
+  }
+  else {
+    pt = pt / "config.conf";
+    std::ofstream ofs;
+    ofs.open(pt);
+    ofs << "T " << TT << std::endl;
+    ofs << "alpha " << MDG::alpha << std::endl;
+    ofs << "p " << MDG::p << std::endl;
+    ofs.close();
+  }
+  return pt;
+}
 class FileUtil {
   std::map<fs::path, std::map<std::string, int>> rollingmap;
 
@@ -58,7 +78,8 @@ class FileUtil {
     }
     else {
       if (!fs::exists(
-              p / (FileName + pref + std::to_string(rollingnumber) + afterf))) {
+              p / (FileName + pref + std::to_string(rollingnumber) + afterf)))
+      {
         rollingmap[p][FileName]++;
         return p / (FileName + pref + std::to_string(rollingnumber) + afterf);
       }
@@ -66,7 +87,8 @@ class FileUtil {
 
     while (1) {
       if (!fs::exists(
-              p / (FileName + pref + std::to_string(rollingnumber) + afterf))) {
+              p / (FileName + pref + std::to_string(rollingnumber) + afterf)))
+      {
         break;
       }
       else {
